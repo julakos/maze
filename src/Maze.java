@@ -73,7 +73,7 @@ public class Maze {
 		int w = 30;
 
 		if (path != null) {
-			g.setColor(Color.BLUE);
+			g.setColor(Color.BLACK);
 
 			for (int i = 0; i < R; i++) {
 				for (int j = 0; j < C; j++) {
@@ -83,7 +83,7 @@ public class Maze {
 				}
 			}
 			int i = R - 1, j = C - 1;
-			g.setColor(Color.CYAN);
+			g.setColor(Color.PINK);
 			g.fillRect(0, 0, w, w);
 			while (i != 0 || j != 0) {
 				g.fillRect(j * w, i * w, w, w);
