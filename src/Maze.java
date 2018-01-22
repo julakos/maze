@@ -1,6 +1,7 @@
 import java.awt.BasicStroke;
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.util.Collections;
@@ -62,6 +63,7 @@ public class Maze {
 	}
 
 	public void draw(Canvas c) {
+
 		BufferStrategy bs = c.getBufferStrategy();
 		if (bs == null) {
 			c.createBufferStrategy(3);
@@ -69,21 +71,12 @@ public class Maze {
 		}
 		Graphics2D g = (Graphics2D) bs.getDrawGraphics(); // draw here
 		g.clearRect(0, 0, c.getWidth(), c.getHeight());
-
 		int w = 30;
 
 		if (path != null) {
-			g.setColor(Color.BLACK);
 
-			for (int i = 0; i < R; i++) {
-				for (int j = 0; j < C; j++) {
-					if (path[i][j] != -1) {
-						g.fillRect(j * w, i * w, w, w);
-					}
-				}
-			}
 			int i = R - 1, j = C - 1;
-			g.setColor(Color.PINK);
+			g.setColor(Color.ORANGE);
 			g.fillRect(0, 0, w, w);
 			while (i != 0 || j != 0) {
 				g.fillRect(j * w, i * w, w, w);
@@ -123,6 +116,10 @@ public class Maze {
 			}
 		}
 		pf(0, 0);
+	}
+
+	public void clearPath() {
+		path = null;
 	}
 
 	private boolean pf(int x, int y) {

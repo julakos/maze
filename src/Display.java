@@ -31,7 +31,7 @@ public class Display {
 		frame.setTitle(title);
 	}
 
-	public void createDisplay() {
+	public void createDisplay(MakeMaze listener) {
 		frame = new JFrame(title);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(true);
@@ -59,19 +59,22 @@ public class Display {
 		resetMenuItem.setActionCommand("Reset");
 		mazeMenu.add(resetMenuItem);
 		
-		MenuItem newMenuItem = new MenuItem("New one");
-		newMenuItem.setActionCommand("New one");
+		MenuItem newMenuItem = new MenuItem("New");
+		newMenuItem.setActionCommand("New");
 		mazeMenu.add(newMenuItem);
+		newMenuItem.addActionListener(listener);
 
 		MenuItem pathMenuItem = new MenuItem("Path");
 		pathMenuItem.setActionCommand("Path");
-		pathMenu.add(pathMenuItem);		
+		pathMenu.add(pathMenuItem);
+		pathMenuItem.addActionListener(listener);
 
 		MenuItem lookMenuItem = new MenuItem("Look");
 		lookMenuItem.setActionCommand("Look");
 		pathMenu.add(lookMenuItem);		
 		
-
+		newMenuItem.addActionListener(listener);
+		
 		menuBar.add(mazeMenu);
 		menuBar.add(pathMenu);
 
@@ -83,5 +86,8 @@ public class Display {
 	public Canvas getCanvas() {
 		return canvas;
 	}
+
+
+
 
 }
