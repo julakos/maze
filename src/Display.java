@@ -58,11 +58,17 @@ public class Display {
 		MenuItem resetMenuItem = new MenuItem("Reset");
 		resetMenuItem.setActionCommand("Reset");
 		mazeMenu.add(resetMenuItem);
+		resetMenuItem.addActionListener(listener);	
 		
 		MenuItem newMenuItem = new MenuItem("New");
 		newMenuItem.setActionCommand("New");
 		mazeMenu.add(newMenuItem);
 		newMenuItem.addActionListener(listener);
+		
+		MenuItem sizeMenuItem = new MenuItem("Size");
+		sizeMenuItem.setActionCommand("Size");
+		mazeMenu.add(sizeMenuItem);
+		sizeMenuItem.addActionListener(listener);
 
 		MenuItem pathMenuItem = new MenuItem("Path");
 		pathMenuItem.setActionCommand("Path");

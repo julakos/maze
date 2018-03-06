@@ -11,6 +11,7 @@ public class Maze {
 	int[][] maze;
 	int[][] path;
 	int R, C;
+	int posX = 1, posY = 1;
 	public static final int UP = 0;
 	public static final int DOWN = 3;
 	public static final int LEFT = 1;
@@ -135,6 +136,19 @@ public class Maze {
 			}
 		}
 		return false;
+	}
+
+	public void move(int x, int y, Canvas c) {
+		BufferStrategy bs = c.getBufferStrategy();
+		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
+		
+		g.setColor(Color.blue);
+		g.drawRect(11 + (30 * (posX + x)), 11 + (30 * (posY + y)), 19 + (30 * (posX + x)), 19 + (30 * (posY + y)));
+		posX = posX + x;
+		posY = posY + y;
+
+		bs.show();
+		g.dispose();
 	}
 
 }
