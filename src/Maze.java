@@ -10,8 +10,9 @@ import java.util.Stack;
 public class Maze {
 	int[][] maze;
 	int[][] path;
+	int[][] movement;
 	int R, C;
-	int posX = 1, posY = 1;
+	int curPosR, curPosC;
 	public static final int UP = 0;
 	public static final int DOWN = 3;
 	public static final int LEFT = 1;
@@ -35,6 +36,8 @@ public class Maze {
 
 	public void generateMaze(int R, int C) {
 		maze = new int[R][C];
+		movement = new int[R][C];
+		movement[0][0] = 2;
 		this.R = R;
 		this.C = C;
 		Stack<Edge> edges = new Stack<Edge>();
@@ -103,6 +106,22 @@ public class Maze {
 			}
 		}
 
+		g.setColor(Color.blue);
+		for (int i = 0; i < R; i++) {
+			for (int j = 0; j < C; j++) {
+				if (movement[i][j] == 1) {
+					g.setColor(Color.blue);
+					g.fillRect(11 + (30 * i), 11 + (30 * j), 8, 8);
+				}
+				if (movement[i][j] == 2) {
+					g.setColor(Color.blue);
+					g.fillRect(9 + (30 * i), 9 + (30 * j), 12, 12);
+					g.setColor(Color.white);
+					g.fillRect(11 + (30 * i), 11 + (30 * j), 8, 8);
+				}
+			}
+		}
+
 		// End Drawing!
 		bs.show();
 		g.dispose();
@@ -138,17 +157,19 @@ public class Maze {
 		return false;
 	}
 
-	public void move(int x, int y, Canvas c) {
-		BufferStrategy bs = c.getBufferStrategy();
-		Graphics2D g = (Graphics2D) bs.getDrawGraphics();
-		
-		g.setColor(Color.blue);
-		g.drawRect(11 + (30 * (posX + x)), 11 + (30 * (posY + y)), 19 + (30 * (posX + x)), 19 + (30 * (posY + y)));
-		posX = posX + x;
-		posY = posY + y;
+	public void goToStart() {
+		movement = new int[R][C];
+		movement[0][0] = 2;
+		curPosR = 0;
+		curPosC = 0;
+	}
 
-		bs.show();
-		g.dispose();
+	public void move(int x, int y) {
+		movement[curPosR][curPosC] = 1;
+		curPosR = Math.min(Math.max(curPosR += x, 0), R - 1);
+		curPosC = Math.min(Math.max(curPosC += y, 0), C - 1);
+		movement[curPosR][curPosC] = 2;
+
 	}
 
 }
